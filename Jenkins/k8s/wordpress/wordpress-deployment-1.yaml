@@ -41,9 +41,9 @@ spec:
         - containerPort: 80
         resources:
           limits:
-            cpu: 500m
+            cpu: 100m
           requests:
-            cpu: 200m 
+            cpu: 100m 
         volumeMounts:
         - name: wordpress
           mountPath: /var/www/html

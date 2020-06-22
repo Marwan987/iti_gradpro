@@ -30,7 +30,16 @@ spec:
               name:  mysecret
               key: WORDPRESS_DB_PASSWORD
         - name:  MYSQL_USER_DB
-          value: wpdb2        
+          value: wpdb2
+        - name:  MYSQL_USER
+          value: wpuser
+        - name:  MYSQL_USER_PWD
+          valueFrom:
+            secretKeyRef:
+              name:  mysecret
+              key: WORDPRESS_DB_PASSWORD
+        - name:  MYSQL_USER_DB
+          value: wpdb          
         ports:
         - containerPort: 3306
         
