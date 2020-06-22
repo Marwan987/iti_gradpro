@@ -6,7 +6,7 @@ pipeline {
     FE_SVC_NAME = "wordpress"
     CLUSTER = "jenkins-cd"
     CLUSTER_ZONE = "us-east1-d"
-    IMAGE_TAG = "wordpress:5.4"
+    IMAGE_TAG = "wordpress"
     JENKINS_CRED = "${PROJECT}"
   }
 
@@ -49,7 +49,7 @@ spec:
       steps {
         container('kubectl') {
           // Change deployed image in canary to the one we just built
-          sh("sed -i.bak 's#wordpress#${IMAGE_TAG}#' wordpress-deployment.yaml")
+          sh("sed -i.bak 's#wordpress:5.4#${IMAGE_TAG}#' wordpress-deployment.yaml")
           step([$class: 'KubernetesEngineBuilder', namespace:'default', projectId: env.PROJECT, clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'wordpress-deployment.yaml', credentialsId: env.JENKINS_CRED, verifyDeployments: true])
          }
       }
