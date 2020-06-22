@@ -3,7 +3,6 @@ pipeline {
   environment {
     PROJECT = "iti-project-281015"
     APP_NAME = "iti-wp"
-    FE_SVC_NAME = "wordpress"
     CLUSTER = "jenkins-cd"
     CLUSTER_ZONE = "us-east1-d"
     IMAGE_TAG = "wordpress"
