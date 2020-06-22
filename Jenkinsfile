@@ -49,7 +49,8 @@ spec:
       steps {
         container('kubectl') {
           // Change deployed image in canary to the one we just built
-          sh("sed -i.bak 's#wordpress:5.4#${IMAGE_TAG}#' wordpress-deployment111.yaml")
+          sh("sed -i.bak 's#wordpress:5.4#${IMAGE_TAG}#' wordpress-deployment.yaml ")
+          sh("cat wordpress-deployment.yaml ")
           step([$class: 'KubernetesEngineBuilder', namespace:'default', projectId: env.PROJECT, clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'wordpress-deployment.yaml', credentialsId: env.JENKINS_CRED, verifyDeployments: true])
          }
       }
