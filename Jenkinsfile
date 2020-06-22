@@ -51,9 +51,9 @@ spec:
           // Change deployed image in canary to the one we just built
           sh("sed -i.bak 's#wordpress:5.4#${IMAGE_TAG}#' wordpress-deployment.yaml ")
           step([$class: 'KubernetesEngineBuilder', namespace:'default', projectId: env.PROJECT, clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'wordpress-deployment.yaml', credentialsId: env.JENKINS_CRED, verifyDeployments: true])
-          step([$class: 'KubernetesEngineBuilder', namespace:'default', projectId: env.PROJECT, clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'wp-ingress.yaml', credentialsId: env.JENKINS_CRED, verifyDeployments: false])
-          sh("echo http://`kubectl --namespace=default get service/${FE_SVC_NAME} -o jsonpath='{.status.loadBalancer.ingress[0].ip}'` > ${FE_SVC_NAME}")
-         }
+          step([$class: 'KubernetesEngineBuilder', namespace:'default', projectId: env.PROJECT, clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'mysql-deployment.yaml', credentialsId: env.JENKINS_CRED, verifyDeployments: true])
+          step([$class: 'KubernetesEngineBuilder', namespace:'default', projectId: env.PROJECT, clusterName: env.CLUSTER, zone: env.CLUSTER_ZONE, manifestPattern: 'services.yaml', credentialsId: env.JENKINS_CRED, verifyDeployments: false])
+          }
       }
     }  
     }}
