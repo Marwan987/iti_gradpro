@@ -19,27 +19,14 @@ spec:
         tier: mysql
     spec:
       containers:
-      - image: marwanaf/mysql:latest
-        name: mysql
-        env:
-        - name:  MYSQL_USER
-          value: wpuser2
-        - name:  MYSQL_USER_PWD
-          valueFrom:
-            secretKeyRef:
-              name:  mysecret
-              key: WORDPRESS_DB_PASSWORD
-        - name:  MYSQL_USER_DB
-          value: wpdb2
-        - name:  MYSQL_USER
-          value: wpuser
-        - name:  MYSQL_USER_PWD
-          valueFrom:
-            secretKeyRef:
-              name:  mysecret
-              key: WORDPRESS_DB_PASSWORD
-        - name:  MYSQL_USER_DB
-          value: wpdb          
+      - image: ahmedatefosman/mysql:v1
+        name: mysql 
         ports:
         - containerPort: 3306
-        
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: data  
