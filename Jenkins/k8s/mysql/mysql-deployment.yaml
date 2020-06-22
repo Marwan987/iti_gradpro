@@ -19,13 +19,20 @@ spec:
         tier: mysql
     spec:
       containers:
-      - image: ahmedatefosman/mysql:v1
+      - image: mysql:5.7
         name: mysql 
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name:  mysecret
+              key: WORDPRESS_DB_PASSWORD    
         ports:
         - containerPort: 3306
         volumeMounts:
         - name: data
           mountPath: /var/lib/mysql
+          subPath: mysql
       volumes:
       - name: data
         persistentVolumeClaim:
