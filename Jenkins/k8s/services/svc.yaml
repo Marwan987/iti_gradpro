@@ -41,7 +41,7 @@ spec:
   ports:
     - port: 3306
   selector:
-    app: wordpress
+    #app: wordpress
     tier: mysql
   clusterIP: None
 ---
